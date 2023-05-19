@@ -13,6 +13,8 @@ scripts:
     exec: flutter test
   format:
     exec: dart format --set-exit-if-changed .
+  cp_files:
+    exec: cp ../../LICENSE .
 
 sdkPath: auto
 
