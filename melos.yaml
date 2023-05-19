@@ -14,7 +14,7 @@ scripts:
   format:
     exec: dart format --set-exit-if-changed .
   cp_files:
-    exec: cp ../../LICENSE .
+    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc .
 
 sdkPath: auto
 
