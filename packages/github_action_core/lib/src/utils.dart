@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'core.dart';
 
+/// Converts the input to a command value.
 String toCommandValue(dynamic input) {
   if (input == null) {
     return '';
@@ -11,6 +12,7 @@ String toCommandValue(dynamic input) {
   return jsonEncode(input);
 }
 
+/// Converts the annotation properties to command properties.
 Map<String, dynamic> toCommandProperties(
     AnnotationProperties? annotationProperties) {
   if (annotationProperties == null) {
