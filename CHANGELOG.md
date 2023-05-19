@@ -15,6 +15,28 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`github_action_core` - `v0.1.0+2`](#github_action_core---v0102)
+
+---
+
+#### `github_action_core` - `v0.1.0+2`
+
+ - **DOCS**: add doc for dart. ([d7995b3e](https://github.com/dart-action/tools/commit/d7995b3e5154a3da4e672a9f8cc6afc51e4362a8))
+ - **DOCS**: Add for command. ([a68b967a](https://github.com/dart-action/tools/commit/a68b967ab9fab2656cdff9fbe1af89cc8bedb830))
+
+
+## 2023-05-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`github_action_core` - `v0.1.0+1`](#github_action_core---v0101)
 
 ---
