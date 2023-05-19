@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`github_action_core` - `v0.1.0+3`](#github_action_core---v0103)
+
+---
+
+#### `github_action_core` - `v0.1.0+3`
+
+ - **REVERT**: changelog. ([f324d6a4](https://github.com/dart-action/tools.git/commit/f324d6a405fbe6a081bbee43109492ed42c0b862))
+
+
+## 2023-05-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`github_action_core` - `v0.1.0+2`](#github_action_core---v0102)
 
 ---
