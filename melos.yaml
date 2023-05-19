@@ -1,5 +1,5 @@
-name: flutter_image_compress
-repository: https://github.com/fluttercandies/flutter_image_compress
+name: github-action-tools-workspace
+repository: https://github.com/dart-action/tools.git
 
 packages:
   - packages/**
