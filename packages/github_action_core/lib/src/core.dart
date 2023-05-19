@@ -3,6 +3,11 @@ import 'dart:io';
 import 'command.dart';
 import 'utils.dart';
 
+class ExitCode {
+  static const int success = 0;
+  static const int failure = 1;
+}
+
 class AnnotationProperties {
   final String? title;
   final String? file;
@@ -66,16 +71,98 @@ void setFailed(dynamic message) {
   error(message);
 }
 
-void error(dynamic message,
-    {AnnotationProperties? properties = const AnnotationProperties()}) {
+void debug(String message) {
+  issueCommand('debug', {}, message);
+}
+
+void info(String message) {
+  stdout.writeln(message);
+}
+
+void _msg(
+  String command,
+  dynamic message,
+  AnnotationProperties? properties,
+) {
   issueCommand(
-    'error',
+    command,
     toCommandProperties(properties),
     message is Error ? message.toString() : message,
   );
 }
 
-class ExitCode {
-  static const int success = 0;
-  static const int failure = 1;
+void error(
+  dynamic message, {
+  AnnotationProperties? properties = const AnnotationProperties(),
+}) {
+  _msg(
+    'error',
+    message,
+    properties,
+  );
+}
+
+void warning(
+  dynamic message, {
+  AnnotationProperties? properties = const AnnotationProperties(),
+}) {
+  _msg(
+    'warning',
+    message,
+    properties,
+  );
+}
+
+void notice(
+  dynamic message, {
+  AnnotationProperties? properties = const AnnotationProperties(),
+}) {
+  _msg(
+    'notice',
+    message,
+    properties,
+  );
+}
+
+void startGroup(String name) {
+  issue('group', message: name);
+}
+
+void groupEnd() {
+  issue('endgroup');
+}
+
+Future<T> group<T>(String name, Future<T> Function() body) async {
+  startGroup(name);
+
+  T result;
+  try {
+    result = await body();
+  } finally {
+    groupEnd();
+  }
+
+  return result;
+}
+
+void saveState(String name, dynamic value) {
+  final filePath = Platform.environment['GITHUB_STATE'] ?? '';
+  if (filePath.isNotEmpty) {
+    issueFileCommand('STATE', prepareKeyValueMessage(name, value));
+    return;
+  }
+
+  issueCommand('save-state', {'name': name}, toCommandValue(value));
+}
+
+String getState(String name) {
+  return Platform.environment['STATE_$name'] ?? '';
+}
+
+void setCommandEcho(bool enabled) {
+  issue('echo', message: enabled ? 'on' : 'off');
+}
+
+bool isDebug() {
+  return Platform.environment['RUNNER_DEBUG'] == '1';
 }
