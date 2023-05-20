@@ -15,7 +15,12 @@ scripts:
     exec: dart format --set-exit-if-changed .
   cp_files:
     exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc .
-
+  index_file:
+    exec: |
+      cp ../../index_generator.yaml .
+      dart pub add dev:index_generator:^3.4.0
+      dart pub get
+      dart run index_generator:index_generator
 sdkPath: auto
 
 command:
