@@ -4,4 +4,5 @@
 
 library github_action_context;
 
-export 'src/github_action_context_base.dart';
+export 'src/context.dart';
+export 'src/interface.dart';
