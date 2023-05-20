@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`github_action_context` - `v0.1.1+1`](#github_action_context---v0111)
+
+---
+
+#### `github_action_context` - `v0.1.1+1`
+
+ - **FIX**: add license. ([702f3389](https://github.com/dart-action/tools/commit/702f3389775aec5a5329278716a3394a081fdbf9))
+
+
+## 2023-05-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`github_action_context` - `v0.1.1`](#github_action_context---v011)
  - [`github_action_core` - `v0.1.1`](#github_action_core---v011)
 

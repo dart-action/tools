@@ -1,3 +1,7 @@
+## 0.1.1+1
+
+ - **FIX**: add license. ([702f3389](https://github.com/dart-action/tools/commit/702f3389775aec5a5329278716a3394a081fdbf9))
+
 ## 0.1.1
 
  - **FEAT**: update index_file. ([6644810f](https://github.com/dart-action/tools/commit/6644810f46a0e79d4aaf65d16393dfd990b7dd7d))
