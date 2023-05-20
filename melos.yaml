@@ -13,14 +13,12 @@ scripts:
     exec: flutter test
   format:
     exec: dart format --set-exit-if-changed .
+  init:
+    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml . && dart pub add dev:index_generator:^3.4.0 && dart pub get
   cp_files:
-    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc .
+    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml .
   index_file:
-    exec: |
-      cp ../../index_generator.yaml .
-      dart pub add dev:index_generator:^3.4.0
-      dart pub get
-      dart run index_generator:index_generator
+    exec: dart run index_generator:index_generator
 sdkPath: auto
 
 command:
