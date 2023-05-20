@@ -1,0 +1,15 @@
+name: github_action_context
+description: For github action, as the context of npm package @actions/github.
+version: 0.1.0
+repository: https://github.com/dart-action/packages
+homepage: https://github.com/dart-action/packages/tree/main/packages/github_action_context
+
+environment:
+  sdk: ">=2.12.0 <4.0.0"
+
+dependencies:
+  github_action_core: ^0.1.0+3
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
