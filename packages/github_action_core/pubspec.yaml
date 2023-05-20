@@ -1,5 +1,5 @@
 name: github_action_core
-description: A starting point for Dart libraries or applications.
+description: For github action, as the npm package @actions/core
 version: 0.1.0+2
 repository: https://github.com/dart-action/packages
 homepage: https://github.com/dart-action/packages/tree/main/packages/github_action_core
