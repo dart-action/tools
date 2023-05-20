@@ -1,20 +1,55 @@
+import 'dart:collection';
 import 'dart:convert';
 
-class PayloadRepository {
+class _BaseItem with MapMixin<dynamic, dynamic> {
+  final Map innerMap;
+
+  _BaseItem(this.innerMap);
+
+  @override
+  operator [](Object? key) {
+    return innerMap[key];
+  }
+
+  @override
+  void operator []=(key, value) {
+    innerMap[key] = value;
+  }
+
+  @override
+  void clear() {
+    innerMap.clear();
+  }
+
+  @override
+  Iterable get keys => innerMap.keys;
+
+  @override
+  remove(Object? key) {
+    return innerMap.remove(key);
+  }
+}
+
+class PayloadRepository extends _BaseItem {
   String? fullName;
   String name;
   Owner owner;
   String? htmlUrl;
 
-  PayloadRepository({
+  PayloadRepository(
+    super.innerMap, {
     this.fullName,
     required this.name,
     required this.owner,
     this.htmlUrl,
   });
 
-  factory PayloadRepository.fromJson(Map json) {
+  static PayloadRepository? fromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
     return PayloadRepository(
+      json,
       fullName: json['full_name'],
       name: json['name'],
       owner: Owner.fromJson(json['owner']),
@@ -22,31 +57,29 @@ class PayloadRepository {
     );
   }
 
-  factory PayloadRepository.fromString(String text) {
-    final json = jsonDecode(text);
-    return PayloadRepository.fromJson(json);
-  }
 }
 
-class Owner {
+class Owner extends _BaseItem {
   String login;
   String? name;
 
-  Owner({
+  Owner(
+    super.innerMap, {
     required this.login,
     this.name,
   });
 
-  factory Owner.fromJson(Map<String, dynamic> json) {
+  factory Owner.fromJson(Map json) {
     return Owner(
+      json,
       login: json['login'],
       name: json['name'],
     );
   }
 }
 
-class WebhookPayload {
-  Map<String, dynamic> repository;
+class WebhookPayload extends _BaseItem {
+  PayloadRepository? repository;
   Map<String, dynamic>? issue;
   Map<String, dynamic>? pullRequest;
   Map<String, dynamic>? sender;
@@ -54,7 +87,8 @@ class WebhookPayload {
   Map<String, dynamic>? installation;
   Map<String, dynamic>? comment;
 
-  WebhookPayload({
+  WebhookPayload(
+    super.innerMap, {
     required this.repository,
     this.issue,
     this.pullRequest,
@@ -64,9 +98,10 @@ class WebhookPayload {
     this.comment,
   });
 
-  factory WebhookPayload.fromJson(Map<String, dynamic> json) {
+  factory WebhookPayload.fromJson(Map json) {
     return WebhookPayload(
-      repository: json['repository'],
+      json,
+      repository: PayloadRepository.fromJson(json['repository']),
       issue: json['issue'],
       pullRequest: json['pull_request'],
       sender: json['sender'],
@@ -74,5 +109,11 @@ class WebhookPayload {
       installation: json['installation'],
       comment: json['comment'],
     );
+  }
+
+
+  factory WebhookPayload.fromString(String text) {
+    final json = jsonDecode(text);
+    return WebhookPayload.fromJson(json);
   }
 }
