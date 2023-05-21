@@ -1,3 +1,7 @@
+## 0.1.2+1
+
+ - Update a dependency to the latest release.
+
 ## 0.1.2
 
  - **FEAT**: update context. ([53d19c6a](https://github.com/dart-action/tools/commit/53d19c6aa71a638ef2dffcbbd2f40ea40824191e))
