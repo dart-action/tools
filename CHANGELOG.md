@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`github_action_context` - `v0.1.2`](#github_action_context---v012)
+
+---
+
+#### `github_action_context` - `v0.1.2`
+
+ - **FEAT**: update context. ([53d19c6a](https://github.com/dart-action/tools/commit/53d19c6aa71a638ef2dffcbbd2f40ea40824191e))
+ - **FEAT**: define context. ([e3ed8fdc](https://github.com/dart-action/tools/commit/e3ed8fdc802c125d63f095ae1dee11bc68a1c7ba))
+ - **FEAT**: add interface. ([498b2d90](https://github.com/dart-action/tools/commit/498b2d902bd013cecaf573e85fca08101429cdba))
+ - **DOCS**: README. ([5b7deaad](https://github.com/dart-action/tools/commit/5b7deaad9ab9bd6db5ed66c53bd72b69361ec215))
+ - **DOCS**: context and payload. ([378897d8](https://github.com/dart-action/tools/commit/378897d8350bab82f3a0b2fa3ec4d72dff47339e))
+
+
 ## 2023-05-20
 
 ### Changes
