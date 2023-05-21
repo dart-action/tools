@@ -1,3 +1,9 @@
+## 0.2.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: update toJson. ([eff44956](https://github.com/dart-action/tools/commit/eff449560dcd4038cf307731b2fdddb5dc9b9e60))
+
 ## 0.1.2+1
 
  - Update a dependency to the latest release.

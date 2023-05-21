@@ -11,6 +11,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - [`github_action_context` - `v0.2.0`](#github_action_context---v020)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `github_action_context` - `v0.2.0`
+
+ - **BREAKING** **FEAT**: update toJson. ([eff44956](https://github.com/dart-action/tools/commit/eff449560dcd4038cf307731b2fdddb5dc9b9e60))
+
+
+## 2023-05-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - There are no breaking changes in this release.
 
 Packages with other changes:
