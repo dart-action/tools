@@ -21,9 +21,11 @@ class Context {
   late String serverUrl;
   late String graphqlUrl;
 
+  Map<String, String> get env => Platform.environment;
+
   Context() {
-    if (Platform.environment.containsKey('GITHUB_EVENT_PATH')) {
-      String eventPath = Platform.environment['GITHUB_EVENT_PATH']!;
+    if (env.containsKey('GITHUB_EVENT_PATH')) {
+      String eventPath = env['GITHUB_EVENT_PATH']!;
       if (File(eventPath).existsSync()) {
         String eventJson = File(eventPath).readAsStringSync();
         payload = WebhookPayload.fromJson(jsonDecode(eventJson));
@@ -32,20 +34,19 @@ class Context {
       }
     }
 
-    eventName = Platform.environment['GITHUB_EVENT_NAME']!;
-    sha = Platform.environment['GITHUB_SHA']!;
-    ref = Platform.environment['GITHUB_REF']!;
-    workflow = Platform.environment['GITHUB_WORKFLOW']!;
-    action = Platform.environment['GITHUB_ACTION']!;
-    actor = Platform.environment['GITHUB_ACTOR']!;
-    job = Platform.environment['GITHUB_JOB']!;
-    runNumber = int.parse(Platform.environment['GITHUB_RUN_NUMBER']!);
-    runId = int.parse(Platform.environment['GITHUB_RUN_ID']!);
-    apiUrl = Platform.environment['GITHUB_API_URL'] ?? 'https://api.github.com';
-    serverUrl =
-        Platform.environment['GITHUB_SERVER_URL'] ?? 'https://github.com';
-    graphqlUrl = Platform.environment['GITHUB_GRAPHQL_URL'] ??
-        'https://api.github.com/graphql';
+    eventName = env['GITHUB_EVENT_NAME']!;
+    sha = env['GITHUB_SHA']!;
+    ref = env['GITHUB_REF']!;
+    workflow = env['GITHUB_WORKFLOW']!;
+    action = env['GITHUB_ACTION']!;
+    actor = env['GITHUB_ACTOR']!;
+    job = env['GITHUB_JOB']!;
+    runNumber = env.intValue('GITHUB_RUN_NUMBER', 10);
+    runId = env.intValue('GITHUB_RUN_ID', 10);
+    apiUrl = env.stringValue('GITHUB_API_URL', 'https://api.github.com');
+    serverUrl = env.stringValue('GITHUB_SERVER_URL', 'https://github.com');
+    graphqlUrl =
+        env.stringValue('GITHUB_GRAPHQL_URL', 'https://api.github.com/graphql');
   }
 
   IssueInfo get issue {
@@ -69,8 +70,8 @@ class Context {
   }
 
   RepoInfo get repo {
-    if (Platform.environment.containsKey('GITHUB_REPOSITORY')) {
-      final repoParts = Platform.environment['GITHUB_REPOSITORY']!.split('/');
+    if (env.containsKey('GITHUB_REPOSITORY')) {
+      final repoParts = env['GITHUB_REPOSITORY']!.split('/');
       return RepoInfo(owner: repoParts[0], repo: repoParts[1]);
     }
 
@@ -106,4 +107,26 @@ class RepoInfo {
     required this.owner,
     required this.repo,
   });
+}
+
+extension _PlatformExt on Map<String, String> {
+  String stringValue(String key, [String? defaultValue]) {
+    final result = this[key] ?? defaultValue;
+    if (result == null) {
+      throw Exception('Missing required environment variable $key');
+    }
+    return result;
+  }
+
+  int intValue(String key, [int? defaultValue]) {
+    try {
+      return int.parse(this[key]!);
+    } catch (e) {
+      if (defaultValue == null) {
+        throw Exception(
+            'Environment variable $key cannot be parsed to int, and no default value was provided.');
+      }
+      return defaultValue;
+    }
+  }
 }

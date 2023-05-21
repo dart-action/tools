@@ -28,6 +28,15 @@ class _BaseItem with MapMixin<dynamic, dynamic> {
   remove(Object? key) {
     return innerMap.remove(key);
   }
+
+  String toJson() {
+    return json.encode(innerMap);
+  }
+
+  @override
+  String toString() {
+    return toJson();
+  }
 }
 
 class PayloadRepository extends _BaseItem {
@@ -56,7 +65,6 @@ class PayloadRepository extends _BaseItem {
       htmlUrl: json['html_url'],
     );
   }
-
 }
 
 class Owner extends _BaseItem {
@@ -78,18 +86,135 @@ class Owner extends _BaseItem {
   }
 }
 
+// export interface WebhookPayload {
+//   [key: string]: any
+//   repository?: PayloadRepository
+//   issue?: {
+//     [key: string]: any
+//     number: number
+//     html_url?: string
+//     body?: string
+//   }
+//   pull_request?: {
+//     [key: string]: any
+//     number: number
+//     html_url?: string
+//     body?: string
+//   }
+//   sender?: {
+//     [key: string]: any
+//     type: string
+//   }
+//   action?: string
+//   installation?: {
+//     id: number
+//     [key: string]: any
+//   }
+//   comment?: {
+//     id: number
+//     [key: string]: any
+//   }
+// }
+
+class Issue extends _BaseItem {
+  int? number;
+  String? htmlUrl;
+  String? body;
+
+  Issue(
+    super.innerMap, {
+    this.number,
+    this.htmlUrl,
+    this.body,
+  });
+
+  static Issue? fromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
+    return Issue(
+      json,
+      number: json['number'],
+      htmlUrl: json['html_url'],
+      body: json['body'],
+    );
+  }
+}
+
+class Sender extends _BaseItem {
+  String? type;
+
+  Sender(
+    super.innerMap, {
+    this.type,
+  });
+
+  static Sender? fromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
+    return Sender(
+      json,
+      type: json['type'],
+    );
+  }
+}
+
+class _IdItem extends _BaseItem {
+  int? id;
+
+  _IdItem(
+    super.innerMap, {
+    this.id,
+  });
+}
+
+class Installation extends _IdItem {
+  Installation(
+    super.innerMap, {
+    super.id,
+  });
+
+  static Installation? fromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
+    return Installation(
+      json,
+      id: json['id'],
+    );
+  }
+}
+
+class Comment extends _IdItem {
+  Comment(
+    super.innerMap, {
+    super.id,
+  });
+
+  static Comment? fromJson(Map? json) {
+    if (json == null) {
+      return null;
+    }
+    return Comment(
+      json,
+      id: json['id'],
+    );
+  }
+}
+
 class WebhookPayload extends _BaseItem {
   PayloadRepository? repository;
-  Map<String, dynamic>? issue;
-  Map<String, dynamic>? pullRequest;
-  Map<String, dynamic>? sender;
+  Issue? issue;
+  Issue? pullRequest;
+  Sender? sender;
   String? action;
-  Map<String, dynamic>? installation;
-  Map<String, dynamic>? comment;
+  Installation? installation;
+  Comment? comment;
 
   WebhookPayload(
     super.innerMap, {
-    required this.repository,
+    this.repository,
     this.issue,
     this.pullRequest,
     this.sender,
@@ -98,22 +223,16 @@ class WebhookPayload extends _BaseItem {
     this.comment,
   });
 
-  factory WebhookPayload.fromJson(Map json) {
+  static WebhookPayload fromJson(Map json) {
     return WebhookPayload(
       json,
       repository: PayloadRepository.fromJson(json['repository']),
-      issue: json['issue'],
-      pullRequest: json['pull_request'],
-      sender: json['sender'],
+      issue: Issue.fromJson(json['issue']),
+      pullRequest: Issue.fromJson(json['pull_request']),
+      sender: Sender.fromJson(json['sender']),
       action: json['action'],
-      installation: json['installation'],
-      comment: json['comment'],
+      installation: Installation.fromJson(json['installation']),
+      comment: Comment.fromJson(json['comment']),
     );
-  }
-
-
-  factory WebhookPayload.fromString(String text) {
-    final json = jsonDecode(text);
-    return WebhookPayload.fromJson(json);
   }
 }
