@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 
+/// Represents a base item with map-like behavior.
 class _BaseItem with MapMixin<dynamic, dynamic> {
   final Map innerMap;
 
@@ -29,6 +30,7 @@ class _BaseItem with MapMixin<dynamic, dynamic> {
     return innerMap.remove(key);
   }
 
+  /// Converts the inner map to a JSON string.
   String toJson() {
     return json.encode(innerMap);
   }
@@ -39,12 +41,21 @@ class _BaseItem with MapMixin<dynamic, dynamic> {
   }
 }
 
+/// Represents the payload repository information.
 class PayloadRepository extends _BaseItem {
+  /// The full name of the repository.
   String? fullName;
+
+  /// The name of the repository.
   String name;
+
+  /// The owner of the repository.
   Owner owner;
+
+  /// The URL of the repository.
   String? htmlUrl;
 
+  /// Constructs a new instance of the PayloadRepository class.
   PayloadRepository(
     super.innerMap, {
     this.fullName,
@@ -53,6 +64,7 @@ class PayloadRepository extends _BaseItem {
     this.htmlUrl,
   });
 
+  /// Creates a PayloadRepository instance from a JSON map.
   static PayloadRepository? fromJson(Map? json) {
     if (json == null) {
       return null;
@@ -67,16 +79,22 @@ class PayloadRepository extends _BaseItem {
   }
 }
 
+/// Represents the owner information.
 class Owner extends _BaseItem {
+  /// The login name of the owner.
   String login;
+
+  /// The name of the owner.
   String? name;
 
+  /// Constructs a new instance of the Owner class.
   Owner(
     super.innerMap, {
     required this.login,
     this.name,
   });
 
+  /// Creates an Owner instance from a JSON map.
   factory Owner.fromJson(Map json) {
     return Owner(
       json,
@@ -86,41 +104,19 @@ class Owner extends _BaseItem {
   }
 }
 
-// export interface WebhookPayload {
-//   [key: string]: any
-//   repository?: PayloadRepository
-//   issue?: {
-//     [key: string]: any
-//     number: number
-//     html_url?: string
-//     body?: string
-//   }
-//   pull_request?: {
-//     [key: string]: any
-//     number: number
-//     html_url?: string
-//     body?: string
-//   }
-//   sender?: {
-//     [key: string]: any
-//     type: string
-//   }
-//   action?: string
-//   installation?: {
-//     id: number
-//     [key: string]: any
-//   }
-//   comment?: {
-//     id: number
-//     [key: string]: any
-//   }
-// }
+/// Represents an issue.
 
 class Issue extends _BaseItem {
+  /// The issue number.
   int? number;
+
+  /// The URL of the issue.
   String? htmlUrl;
+
+  /// The body of the issue.
   String? body;
 
+  /// Constructs a new instance of the Issue class.
   Issue(
     super.innerMap, {
     this.number,
@@ -128,6 +124,7 @@ class Issue extends _BaseItem {
     this.body,
   });
 
+  /// Creates an Issue instance from a JSON map.
   static Issue? fromJson(Map? json) {
     if (json == null) {
       return null;
@@ -141,14 +138,19 @@ class Issue extends _BaseItem {
   }
 }
 
+/// Represents the sender information.
+
 class Sender extends _BaseItem {
+  /// The type of the sender.
   String? type;
 
+  /// Constructs a new instance of the Sender class.
   Sender(
     super.innerMap, {
     this.type,
   });
 
+  /// Creates a Sender instance from a JSON map.
   static Sender? fromJson(Map? json) {
     if (json == null) {
       return null;
@@ -160,7 +162,10 @@ class Sender extends _BaseItem {
   }
 }
 
+/// Represents an item with an ID.
+
 class _IdItem extends _BaseItem {
+  /// The ID of the item.
   int? id;
 
   _IdItem(
@@ -169,12 +174,15 @@ class _IdItem extends _BaseItem {
   });
 }
 
+/// Represents an installation.
+
 class Installation extends _IdItem {
   Installation(
     super.innerMap, {
     super.id,
   });
 
+  /// Creates an Installation instance from a JSON map.
   static Installation? fromJson(Map? json) {
     if (json == null) {
       return null;
@@ -186,12 +194,15 @@ class Installation extends _IdItem {
   }
 }
 
+/// Represents a comment.
+
 class Comment extends _IdItem {
   Comment(
     super.innerMap, {
     super.id,
   });
 
+  /// Creates a Comment instance from a JSON map.
   static Comment? fromJson(Map? json) {
     if (json == null) {
       return null;
@@ -203,15 +214,31 @@ class Comment extends _IdItem {
   }
 }
 
+/// Represents the webhook payload.
+
 class WebhookPayload extends _BaseItem {
+  /// The payload repository information.
   PayloadRepository? repository;
+
+  /// The issue information.
   Issue? issue;
+
+  /// The pull request information.
   Issue? pullRequest;
+
+  /// The sender information.
   Sender? sender;
+
+  /// The action name.
   String? action;
+
+  /// The installation information.
   Installation? installation;
+
+  /// The comment information.
   Comment? comment;
 
+  /// Constructs a new instance of the WebhookPayload class.
   WebhookPayload(
     super.innerMap, {
     this.repository,
@@ -223,6 +250,7 @@ class WebhookPayload extends _BaseItem {
     this.comment,
   });
 
+  /// Creates a WebhookPayload instance from a JSON map.
   static WebhookPayload fromJson(Map json) {
     return WebhookPayload(
       json,

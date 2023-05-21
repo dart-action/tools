@@ -8,21 +8,46 @@ final context = Context();
 class Context {
   late WebhookPayload payload;
 
+  /// The name of the event that triggered the workflow.
   late String eventName;
+
+  /// The commit SHA that triggered the workflow.
   late String sha;
+
+  /// The ref that triggered the workflow.
   late String ref;
+
+  /// The workflow name.
   late String workflow;
+
+  /// The action name.
   late String action;
+
+  /// The username of the user or app that initiated the workflow.
   late String actor;
+
+  /// The job name.
   late String job;
+
+  /// The run number of the workflow.
   late int runNumber;
+
+  /// The run ID of the workflow.
   late int runId;
+
+  /// The URL of the GitHub API.
   late String apiUrl;
+
+  /// The URL of the GitHub server.
   late String serverUrl;
+
+  /// The URL of the GitHub GraphQL API.
   late String graphqlUrl;
 
+  /// Retrieves the environment variables.
   Map<String, String> get env => Platform.environment;
 
+  /// Constructs a new instance of the Context class.
   Context() {
     if (env.containsKey('GITHUB_EVENT_PATH')) {
       String eventPath = env['GITHUB_EVENT_PATH']!;
@@ -49,6 +74,7 @@ class Context {
         env.stringValue('GITHUB_GRAPHQL_URL', 'https://api.github.com/graphql');
   }
 
+  /// Gets the information about the issue.
   IssueInfo get issue {
     final payload = this.payload;
 
@@ -69,6 +95,7 @@ class Context {
     );
   }
 
+  /// Gets the information about the repository.
   RepoInfo get repo {
     if (env.containsKey('GITHUB_REPOSITORY')) {
       final repoParts = env['GITHUB_REPOSITORY']!.split('/');
@@ -87,11 +114,18 @@ class Context {
   }
 }
 
+/// A class representing information about an issue.
 class IssueInfo {
+  /// The owner of the repository.
   final String owner;
+
+  /// The repository name
   final String repo;
+
+  /// The issue number.
   final int? number;
 
+  /// Constructs a new instance of the IssueInfo class.
   IssueInfo({
     required this.owner,
     required this.repo,
@@ -99,17 +133,27 @@ class IssueInfo {
   });
 }
 
+/// A class representing information about a repository.
 class RepoInfo {
+  /// The owner of the repository.
   final String owner;
+
+  /// The repository name.
   final String repo;
 
+  /// Constructs a new instance of the RepoInfo class.
   RepoInfo({
     required this.owner,
     required this.repo,
   });
 }
 
+/// Extension methods for the Map<String, String> class.
 extension _PlatformExt on Map<String, String> {
+  /// Retrieves the value associated with the given key as a string.
+  ///
+  /// If the key is not found, [defaultValue] is returned.
+  /// If [defaultValue] is not provided and the key is not found, an exception is thrown.
   String stringValue(String key, [String? defaultValue]) {
     final result = this[key] ?? defaultValue;
     if (result == null) {
@@ -118,6 +162,12 @@ extension _PlatformExt on Map<String, String> {
     return result;
   }
 
+  /// Retrieves the value associated with the given key as an integer.
+  ///
+  /// If the key is not found or the value cannot be parsed as an integer,
+  /// [defaultValue] is returned (if provided).
+  /// If [defaultValue] is not provided and the value cannot be parsed as an integer,
+  /// an exception is thrown.
   int intValue(String key, [int? defaultValue]) {
     try {
       return int.parse(this[key]!);
