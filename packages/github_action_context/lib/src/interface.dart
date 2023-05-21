@@ -31,13 +31,13 @@ class _BaseItem with MapMixin<dynamic, dynamic> {
   }
 
   /// Converts the inner map to a JSON string.
-  String toJson() {
-    return json.encode(innerMap);
+  Map toJson() {
+    return innerMap;
   }
 
   @override
   String toString() {
-    return toJson();
+    return JsonEncoder.withIndent('  ').convert(innerMap);
   }
 }
 
