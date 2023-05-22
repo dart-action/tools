@@ -1,3 +1,7 @@
+## 0.1.1+2
+
+ - **FIX**: issueCommand. ([f5c8bc34](https://github.com/dart-action/tools/commit/f5c8bc34bebe5efcc741f682ce9c9120c851700b))
+
 ## 0.1.1+1
 
  - **DOCS**: update readme. ([337409da](https://github.com/dart-action/tools/commit/337409da1ea6d2c1e44fdd739dcb76749935bd19))

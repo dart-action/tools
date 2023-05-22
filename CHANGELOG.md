@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-05-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`github_action_core` - `v0.1.1+2`](#github_action_core---v0112)
+ - [`github_action_context` - `v0.2.0+1`](#github_action_context---v0201)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `github_action_context` - `v0.2.0+1`
+
+---
+
+#### `github_action_core` - `v0.1.1+2`
+
+ - **FIX**: issueCommand. ([f5c8bc34](https://github.com/dart-action/tools/commit/f5c8bc34bebe5efcc741f682ce9c9120c851700b))
+
+
 ## 2023-05-21
 
 ### Changes
