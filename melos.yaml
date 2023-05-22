@@ -18,10 +18,10 @@ scripts:
     exec: dart format --set-exit-if-changed .
     description: Format the code.
   init:
-    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml . && dart pub add dev:index_generator:^3.4.0 && dart pub get
+    exec: cp ../../LICENSE . && cp ../../files/* . && dart pub add dev:index_generator:^3.4.0 && dart pub get
     description: Initialize the workspace.
   cp_files:
-    exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml .
+    exec: cp ../../LICENSE . && cp ../../files/* .
     description: Copy files from root.
   index_file:
     exec: dart run index_generator:index_generator
