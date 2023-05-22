@@ -5,11 +5,15 @@ import 'package:uuid/uuid.dart';
 
 import 'utils.dart';
 
+String _eol = Platform.isWindows ? '\r\n' : '\n';
+
+String get eol => _eol;
+
 /// Issues a command to the job step.
 void issueCommand(
     String command, Map<String, dynamic> properties, dynamic message) {
   final cmd = Command(command, properties, message);
-  stdout.write('${cmd.toString()}${Platform.operatingSystem}');
+  stdout.write('$cmd$eol');
 }
 
 /// Issues a command with a given name and optional message.
