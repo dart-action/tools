@@ -7,18 +7,25 @@ packages:
 scripts:
   analyze:
     exec: dart analyze .
+    description: Analyze the project for errors.
   get:
     exec: flutter pub get
+    description: Get the dependencies.
   test:
     exec: flutter test
+    description: Run the tests.
   format:
     exec: dart format --set-exit-if-changed .
+    description: Format the code.
   init:
     exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml . && dart pub add dev:index_generator:^3.4.0 && dart pub get
+    description: Initialize the workspace.
   cp_files:
     exec: cp ../../LICENSE . && cp ../../.markdownlint.jsonc . && cp ../../index_generator.yaml .
+    description: Copy files from root.
   index_file:
     exec: dart run index_generator:index_generator
+    description: Generate index file.
 sdkPath: auto
 
 command:
