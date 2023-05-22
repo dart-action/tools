@@ -67,8 +67,8 @@ void exportVariable(String name, dynamic val) {
 
 void setFailed(dynamic message) {
   exitCode = ExitCode.failure;
-
   error(message);
+  exit(exitCode);
 }
 
 void debug(String message) {
