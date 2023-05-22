@@ -11,7 +11,10 @@ String get eol => _eol;
 
 /// Issues a command to the job step.
 void issueCommand(
-    String command, Map<String, dynamic> properties, dynamic message) {
+  String command,
+  Map<String, dynamic> properties,
+  dynamic message,
+) {
   final cmd = Command(command, properties, message);
   stdout.write('$cmd$eol');
 }
