@@ -1,3 +1,9 @@
+## 0.2.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: setFailed will exit. ([1f9d8a4b](https://github.com/dart-action/tools/commit/1f9d8a4be13820fc3e7c96576689e772a31e8a17))
+
 ## 0.1.1+2
 
  - **FIX**: issueCommand. ([f5c8bc34](https://github.com/dart-action/tools/commit/f5c8bc34bebe5efcc741f682ce9c9120c851700b))

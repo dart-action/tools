@@ -1,6 +1,6 @@
 name: github_action_core
 description: For github action, as the npm package @actions/core
-version: 0.1.1+2
+version: 0.2.0
 repository: https://github.com/dart-action/packages
 homepage: https://github.com/dart-action/packages/tree/main/packages/github_action_core
 

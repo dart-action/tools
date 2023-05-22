@@ -11,6 +11,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - [`github_action_core` - `v0.2.0`](#github_action_core---v020)
+
+Packages with other changes:
+
+ - [`github_action_context` - `v0.2.0+2`](#github_action_context---v0202)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `github_action_context` - `v0.2.0+2`
+
+---
+
+#### `github_action_core` - `v0.2.0`
+
+ - **BREAKING** **FEAT**: setFailed will exit. ([1f9d8a4b](https://github.com/dart-action/tools/commit/1f9d8a4be13820fc3e7c96576689e772a31e8a17))
+
+
+## 2023-05-22
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - There are no breaking changes in this release.
 
 Packages with other changes:
