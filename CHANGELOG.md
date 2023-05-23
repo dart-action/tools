@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-05-23
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`github_action_context` - `v0.2.1`](#github_action_context---v021)
+
+---
+
+#### `github_action_context` - `v0.2.1`
+
+ - **FEAT**: Change BaseItem to SafeMap. ([573f469f](https://github.com/dart-action/tools/commit/573f469ffca073a0e5ece306a1dc8edc2437ead2))
+
+
 ## 2023-05-22
 
 ### Changes

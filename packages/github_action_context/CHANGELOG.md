@@ -1,3 +1,7 @@
+## 0.2.1
+
+ - **FEAT**: Change BaseItem to SafeMap. ([573f469f](https://github.com/dart-action/tools/commit/573f469ffca073a0e5ece306a1dc8edc2437ead2))
+
 ## 0.2.0+2
 
  - Update a dependency to the latest release.

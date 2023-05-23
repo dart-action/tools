@@ -1,6 +1,6 @@
 name: github_action_context
 description: For github action, as the context of npm package @actions/github.
-version: 0.2.0+2
+version: 0.2.1
 repository: https://github.com/dart-action/packages
 homepage: https://github.com/dart-action/packages/tree/main/packages/github_action_context
 
