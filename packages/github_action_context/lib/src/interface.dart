@@ -1,15 +1,56 @@
 import 'dart:collection';
 import 'dart:convert';
 
-/// Represents a base item with map-like behavior.
-class _BaseItem with MapMixin<dynamic, dynamic> {
+class SafeList with ListMixin {
+  final List<dynamic> innerList;
+
+  SafeList(this.innerList);
+
+  @override
+  int get length => innerList.length;
+
+  @override
+  set length(int value) {
+    innerList.length = value;
+  }
+
+  @override
+  operator [](int index) {
+    final v = innerList[index];
+    if (v == null) {
+      return SafeMap({});
+    } else if (v is Map) {
+      return SafeMap(v);
+    } else if (v is List) {
+      return SafeList(v);
+    } else {
+      return v;
+    }
+  }
+
+  @override
+  void operator []=(int index, value) {
+    innerList[index] = value;
+  }
+}
+
+class SafeMap with MapMixin<dynamic, dynamic> {
   final Map innerMap;
 
-  _BaseItem(this.innerMap);
+  SafeMap(this.innerMap);
 
   @override
   operator [](Object? key) {
-    return innerMap[key];
+    final v = innerMap[key];
+    if (v == null) {
+      return SafeMap({});
+    } else if (v is Map) {
+      return SafeMap(v);
+    } else if (v is List) {
+      return SafeList(v);
+    } else {
+      return v;
+    }
   }
 
   @override
@@ -42,7 +83,7 @@ class _BaseItem with MapMixin<dynamic, dynamic> {
 }
 
 /// Represents the payload repository information.
-class PayloadRepository extends _BaseItem {
+class PayloadRepository extends SafeMap {
   /// The full name of the repository.
   String? fullName;
 
@@ -80,7 +121,7 @@ class PayloadRepository extends _BaseItem {
 }
 
 /// Represents the owner information.
-class Owner extends _BaseItem {
+class Owner extends SafeMap {
   /// The login name of the owner.
   String login;
 
@@ -106,7 +147,7 @@ class Owner extends _BaseItem {
 
 /// Represents an issue.
 
-class Issue extends _BaseItem {
+class Issue extends SafeMap {
   /// The issue number.
   int? number;
 
@@ -140,7 +181,7 @@ class Issue extends _BaseItem {
 
 /// Represents the sender information.
 
-class Sender extends _BaseItem {
+class Sender extends SafeMap {
   /// The type of the sender.
   String? type;
 
@@ -164,7 +205,7 @@ class Sender extends _BaseItem {
 
 /// Represents an item with an ID.
 
-class _IdItem extends _BaseItem {
+class _IdItem extends SafeMap {
   /// The ID of the item.
   int? id;
 
@@ -216,7 +257,7 @@ class Comment extends _IdItem {
 
 /// Represents the webhook payload.
 
-class WebhookPayload extends _BaseItem {
+class WebhookPayload extends SafeMap {
   /// The payload repository information.
   PayloadRepository? repository;
 
